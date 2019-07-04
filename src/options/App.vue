@@ -16,18 +16,33 @@
         </li>
       </ul>
     </div>
-    <div v-if="count">Total {{ count }} blocked.</div>
+    <hr/>
+    <div class="stats-list">
+      <div>
+        <h2>Stats total</h2>
+        <Stats :items="blockedItems" :tags="tags" />
+      </div>
+      <div>
+        <h2>Stats today</h2>
+        <Stats :items="todayItems" :tags="tags" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import Stats from "./Stats";
+
 export default {
   name: "App",
+  components: {
+    Stats
+  },
   data() {
     return {
       tags: [],
       currentTag: null,
-      count: null
+      blockedItems: []
     };
   },
   created() {
@@ -39,7 +54,7 @@ export default {
       },
       function(items) {
         self.tags = items.tags;
-        self.count = items.blockedItems.length;
+        self.blockedItems = items.blockedItems;
       }
     );
   },
@@ -80,8 +95,20 @@ export default {
   computed: {
     isInvalid() {
       return this.tags.indexOf(this.currentTag) !== -1;
+    },
+    todayItems() {
+      return this.blockedItems.filter(c => isToday(new Date(c.time)));
     }
   }
+};
+
+const isToday = someDate => {
+  const today = new Date();
+  return (
+    someDate.getDate() == today.getDate() &&
+    someDate.getMonth() == today.getMonth() &&
+    someDate.getFullYear() == today.getFullYear()
+  );
 };
 </script>
 
@@ -129,7 +156,15 @@ input {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.container {
-  max-width: 400px;
+.stats-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+hr {
+  margin: 1rem 0;
+  border: none;
+  border-top: 1px solid rgba(0,0,0,.2);
 }
 </style>

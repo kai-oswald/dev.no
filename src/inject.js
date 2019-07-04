@@ -8,12 +8,11 @@ chrome.storage.sync.get(
 );
 
 function hideIgnoredTags(tags) {
+  let blockedItems = [];
   tags.forEach(tag => {
     var tagElements = Array.from(
       document.querySelectorAll(`.single-article .tags a[href='/t/${tag}']`)
     );
-
-    let blockedItems = [];
 
     tagElements.forEach(tagElement => {
       // the whole article is located 2 elements above (parent.parent);
@@ -26,9 +25,8 @@ function hideIgnoredTags(tags) {
         time: new Date().getTime()
       });
     });
-    
-    addToBlockedItems(blockedItems);
   });
+  addToBlockedItems(blockedItems);
 }
 
 function addToBlockedItems(val) {
