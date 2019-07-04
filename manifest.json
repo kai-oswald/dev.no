@@ -12,13 +12,17 @@
     "https://dev.to/",
     "storage"
   ],
+  "background": {
+    "scripts": ["src/background.js"],
+    "persistent": false
+  },
   "content_scripts": [
     {
       "matches": [
         "https://dev.to/"
       ],
       "js": [
-        "src/inject/inject.js"
+        "src/inject.js"
       ]
     }
   ]
