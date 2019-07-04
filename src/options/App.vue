@@ -7,24 +7,26 @@
       <span style="display:block" v-else>&nbsp;</span>
     </form>
     <div v-if="tags.length === 0">You don't ignore any tags yet. Add some:)</div>
-    <div v-else class="taglist">
-      <h2>Ignored tags</h2>
-      <ul>
-        <li v-for="tag in tags" :key="tag">
-          #{{tag}}
-          <span @click="removeTag(tag)" class="remove">remove</span>
-        </li>
-      </ul>
-    </div>
-    <hr/>
-    <div class="stats-list">
-      <div>
-        <h2>Stats total</h2>
-        <Stats :items="blockedItems" :tags="tags" />
+    <div v-else>
+      <div class="taglist">
+        <h2>Ignored tags</h2>
+        <ul>
+          <li v-for="tag in tags" :key="tag">
+            #{{tag}}
+            <button @click="removeTag(tag)" class="remove">remove</button>
+          </li>
+        </ul>
       </div>
-      <div>
-        <h2>Stats today</h2>
-        <Stats :items="todayItems" :tags="tags" />
+      <hr />
+      <div class="stats-list">
+        <div>
+          <h2>Stats total</h2>
+          <Stats :items="blockedItems" :tags="tags" />
+        </div>
+        <div>
+          <h2>Stats today</h2>
+          <Stats :items="todayItems" :tags="tags" />
+        </div>
       </div>
     </div>
   </div>
@@ -121,13 +123,6 @@ p {
   font-size: 20px;
 }
 
-.remove {
-  color: red;
-  text-decoration: underline;
-  padding: 0 1rem;
-  cursor: pointer;
-}
-
 .taglist {
   margin-top: 0.2rem;
 }
@@ -141,6 +136,7 @@ p {
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .taglist ul li:nth-child(2n) {
@@ -165,6 +161,21 @@ input {
 hr {
   margin: 1rem 0;
   border: none;
-  border-top: 1px solid rgba(0,0,0,.2);
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+button {
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+}
+
+button.remove {
+  background: tomato;
+  color: white;
+  border: 1px solid tomato;
+}
+
+button.remove:hover {
+  transform: translateY(-1px);
 }
 </style>
