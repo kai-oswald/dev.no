@@ -1,18 +1,11 @@
-chrome.extension.sendMessage({}, function(response) {
-  var readyStateCheckInterval = setInterval(function() {
-    if (document.readyState === "complete") {
-      clearInterval(readyStateCheckInterval);
-      chrome.storage.sync.get(
-        {
-          tags: []
-        },
-        function(items) {
-		  hideIgnoredTags(items.tags);
-        }
-      );
-    }
-  }, 10);
-});
+chrome.storage.sync.get(
+  {
+    tags: []
+  },
+  function(items) {
+    hideIgnoredTags(items.tags);
+  }
+);
 
 function hideIgnoredTags(tags) {
   tags.forEach(tag => {
@@ -20,10 +13,34 @@ function hideIgnoredTags(tags) {
       document.querySelectorAll(`.single-article .tags a[href='/t/${tag}']`)
     );
 
+    let blockedItems = [];
+
     tagElements.forEach(tagElement => {
       // the whole article is located 2 elements above (parent.parent);
       var articleElement = tagElement.parentElement.parentElement;
       articleElement.style.display = "none";
+
+      blockedItems.push({
+        tag,
+        element: articleElement,
+        time: new Date().getTime()
+      });
     });
+    
+    addToBlockedItems(blockedItems);
   });
+}
+
+function addToBlockedItems(val) {
+  chrome.storage.sync.get(
+    {
+      blockedItems: []
+    },
+    function(items) {
+      let newBlockedItems = items.blockedItems.concat(val);
+      chrome.storage.sync.set({
+        blockedItems: newBlockedItems
+      });
+    }
+  );
 }

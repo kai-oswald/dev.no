@@ -7,22 +7,22 @@
   "icons": {
     "512": "icons/Logo.png"
   },
-  "options_page": "src/options/index.html",
+  "options_page": "options/options.html",
   "permissions": [
     "https://dev.to/",
     "storage"
   ],
   "background": {
-    "scripts": ["src/background.js"],
+    "scripts": ["background.js"],
     "persistent": false
-  },
+  },  
   "content_scripts": [
     {
       "matches": [
         "https://dev.to/"
       ],
       "js": [
-        "src/inject.js"
+        "inject.js"
       ]
     }
   ]
