@@ -18,14 +18,20 @@
         </ul>
       </div>
       <hr />
-      <div class="stats-list">
-        <div>
-          <h2>Stats total</h2>
-          <Stats :items="blockedItems" :tags="tags" />
+      <div v-if="blockedItems.length > 0">
+        <div class="stats-list">
+          <div>
+            <h2>Stats total</h2>
+            <Stats :items="blockedItems" :tags="tags" />
+          </div>
+          <div>
+            <h2>Stats today</h2>
+            <Stats :items="todayItems" :tags="tags" />
+          </div>
         </div>
-        <div>
-          <h2>Stats today</h2>
-          <Stats :items="todayItems" :tags="tags" />
+
+        <div class="article-list-wrapper">
+          <ArticleList :items="blockedItems" />
         </div>
       </div>
     </div>
@@ -34,11 +40,13 @@
 
 <script>
 import Stats from "./Stats";
+import ArticleList from "./ArticleList";
 
 export default {
   name: "App",
   components: {
-    Stats
+    Stats,
+    ArticleList
   },
   data() {
     return {

@@ -18,10 +18,16 @@ function hideIgnoredTags(tags) {
       // the whole article is located 2 elements above (parent.parent);
       var articleElement = tagElement.parentElement.parentElement;
       articleElement.style.display = "none";
+      let titleEl = articleElement.querySelector(".content h3");
+      let title = titleEl.innerText;
+      let href = articleElement.querySelector(".index-article-link").getAttribute("href");
 
       blockedItems.push({
         tag,
-        element: articleElement,
+        element: {
+          title,
+          href
+        },
         time: new Date().getTime()
       });
     });
