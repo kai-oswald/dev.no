@@ -10,9 +10,6 @@
 <script>
 export default {
   props: ["items"],
-  created() {
-    console.log(this.items);
-  },
   computed: {
     recentItems() {
       let sorted = this.items.sort(function(a, b) {

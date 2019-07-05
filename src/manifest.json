@@ -1,11 +1,11 @@
 {
   "name": "Dev.no - Ignore tags on dev.to",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "manifest_version": 2,
   "description": "Allows to ignore and hide specified tags from dev.to",
   "homepage_url": "https://github.com/kai-oswald/dev.no",
   "icons": {
-    "512": "icons/Logo.png"
+    "128": "icons/Logo.png"
   },
   "options_page": "options/options.html",
   "permissions": [

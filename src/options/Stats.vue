@@ -21,7 +21,6 @@ export default {
         let tagItems = this.items.filter(c => c.tag === tag);
         series.push(tagItems.length);
       });
-      console.log(series);
       return series;
     },
     chartOptions() {
