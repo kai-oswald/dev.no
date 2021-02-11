@@ -14,7 +14,7 @@
     "watch:dev": "cross-env HMR=true npm run build:dev -- --watch"
   },
   "dependencies": {
-    "apexcharts": "^3.8.1",
+    "apexcharts": "^3.24.0",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.4.0"
   },
